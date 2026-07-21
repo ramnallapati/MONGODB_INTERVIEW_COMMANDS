@@ -238,3 +238,101 @@ db.employees.replaceOne(
 ```
 
 --- 
+
+### 31. Add a new skill to employee 101.
+```javascript
+db.employees.updateOne(
+    { emp_id: 101 },
+    {
+        $push: {
+            skills: "Java"
+        }
+    }
+)
+```
+
+
+### 32. Remove the skill "SQL" from employee 101.
+```javascript
+db.employees.updateOne(
+  {'emp_id':101},
+  {$pull:{'skills':'SQL'}}
+)
+```
+
+
+### 33. Add multiple skills at once.to all the employees
+```javascript
+db.employees.updateMany(
+  {},
+  {$push:{'skills':{$each:['Communication','Punctuality','Time Management']}}}
+)
+```
+
+
+### 34. Remove the last skill from every employee.
+```javascript
+db.employees.updateMany(
+  {},
+  {$pop:{'skills':1}}
+)
+```
+
+
+### 35. Add skill only if it doesn't already exist.
+```javascript
+db.employees.updateMany(
+  {},
+  {$addToSet:{'skills':'AI'}}
+)
+```
+
+
+### 36. Update nested address.city from in Telangana. Hyderabad to Vishakapatnam
+```javascript
+db.emp_address.updateMany(
+  {'address.state':'Telangana'},
+  {$set:{'address.city':'Vishakapatanam'}}
+)
+```
+
+
+### 37. Update salary only if it is below ₹40,000. Increasing 5 percentage.
+```javascript
+db.employees.updateMany(
+  {'salary':{$lt:40000}},
+  {$mul:{'salary':1.05}}
+)
+```
+
+
+### 38. Increase the Salary to every employee 20 percentage.
+```javascript
+db.employees.updateMany(
+  {},
+  {$mul:{'salary':1.20}}
+)
+```
+
+### 39. Change current date using $currentDate.
+```javascript
+db.employees.updateMany(
+  {},
+  {$currentDate:{'joining_date':true}}
+)
+```
+
+
+### 40. Add a Field Latest updated
+```javascript
+db.emp_address.updateMany(
+  {},
+  {
+    $currentDate: {
+      latest_update: true
+    }
+  }
+)
+```
+
+---
