@@ -134,3 +134,107 @@ db.employees.deleteOne({"emp_id":105})
 ```
 
 ---
+
+
+### 21. Increase everyone's salary by ₹5,000.
+```javascript
+db.employees.updateMany(
+  {},
+  {$inc:{'salary':5000}}
+)
+```
+
+
+### 22. Increase only IT employees' salary by 10%.
+```javascript
+db.employees.updateMany(
+  {'department':'IT'},
+  {$mul:{'salary':1.10}}
+)
+```
+
+
+### 23. Change "Software Engineer" to "Senior Software Engineer".
+```javascript
+db.employees.updateMany(
+  {'designation':'Software Engineer'},
+  {$set:{'designation':'Senior Software Engineer'}}
+)
+```
+
+### 24. Update the city of employee 101 to Chennai.
+```javascript
+db.employees.updateOne(
+  {'emp_id':101},
+  {$set:{'city':'Chennai'}}
+)
+```
+
+### 25. Rename the field phone to mobile.
+```javascript
+db.employees.updateMany(
+  {},
+  {$rename:{'phone':'mobile'}}
+)
+```
+
+
+### 26. Remove the email field from all HR employees.
+```javascript
+db.employees.updateMany(
+  {'department':'HR'},
+  {$unset:{'email':''}}
+)
+```
+
+
+### 27. Add a bonus field with value 10,000.
+```javascript
+db.employees.updateMany(
+  {},
+  {$set:{'bonus':10000}}
+)
+```
+
+### 28. Add a joining year field.
+```javascript
+db.employees.updateMany(
+  {},
+  {$set:{'Joining_year':2026}}
+)
+```
+
+
+### 29. Change active status to false for employees with experience less than 2 years.
+```javascript
+db.employees.updateMany(
+  {'experience':{$lt:2}},
+  {$set:{active:false}}
+)
+```
+
+### 30. Replace the complete document of employee 102.
+```javascript
+db.employees.replaceOne(
+  {'emp_id':102},
+  {
+    emp_id: 102,
+    name: "Priya Sharma",
+    age: 27,
+    gender: "Female",
+    department: "HR",
+    designation: "HR Executive",
+    salary: 55000,
+    experience: 4,
+    email: "priya@gmail.com",
+    phone: "9123456789",
+    city: "Bengaluru",
+    joining_date: new Date("2022-08-15"),
+    skills: ["Recruitment", "Employee Relations", "MS Excel"],
+    manager_id: 202,
+    active: true
+}
+)
+```
+
+--- 
