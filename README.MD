@@ -43,4 +43,37 @@ db.employees.find({'city':'Hyderabad'})
 db.employees.find({'age':{$gt:25}})
 ```
 
-###
+### 7. Display only the first five employees.
+```javascript
+db.employees.find().limit(5)
+```
+
+
+### 8. Skip the first three employees and display the rest.
+```javascript
+db.employees.find().skip(3)
+```
+
+### 9.Sort employees by salary in ascending order.
+```javascript
+db.employees.find().sort({'salary':1})
+```
+
+
+### 10. Sort employees by age in descending order.
+```javascript
+db.employees.find().sort({'salary':-1})
+```
+
+---
+
+### 11. Find one employee named "Rama Rao".
+```javascript
+db.employees.find({'name':'Rama Rao'})
+```
+
+
+### 12. Count employees working in the IT department.
+```javascript
+db.employees.countDocuments({'department':'IT'})
+```
