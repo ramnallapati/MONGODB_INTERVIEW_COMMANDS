@@ -1,10 +1,10 @@
 ### 1. Display all employees.
-```bash
+```javascript
 db.employees.find({})
 ```
 
 ### 2. Display only employee names.
-```bash
+```javascript
 db.employees.find(
   {},{_id:0,name:1}
 )
@@ -12,7 +12,7 @@ db.employees.find(
 
 
 ### 3. Display employees whose salary is greater than 50000
-```bash
+```javascript
 db.employees.find(
   {'salary':{$gt:50000}}
 )
@@ -21,7 +21,7 @@ db.employees.find(
 
 
 ### 4.Find employees whose salary is between ₹40,000 and ₹80,000.
-```bash
+```javascript
 db.employees.find(
   {'salary':
   {
@@ -33,6 +33,14 @@ db.employees.find(
 
 
 ### 5. Find employees from Hyderabad.
-```bash
+```javascript
 db.employees.find({'city':'Hyderabad'})
 ```
+
+
+### 6. Find employees whose age is greater than 25
+```javascript
+db.employees.find({'age':{$gt:25}})
+```
+
+###
