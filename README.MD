@@ -9,6 +9,23 @@
          alt="MongoDB Image">
 </div>
 
+<div style='margin:15px'>
+<h1 style='text-align:center;color:red'>👁️ Mongodb Setup</h1>
+<h3>Open the Mongodb Sheel </h3>
+<h4>Create the Database ComapanyDB :</h4>
+<code>
+use ComapnaDB
+</code>
+<h4>Create collections using the above data from text files :</h4>
+<code>
+db.createCollection()
+</code>
+</div>
+
+---
+
+<h1 style='color:red;text-align:center;margin:15px'>📊 Basic Crud Operations</h1>
+
 ### 1. Display all employees.
 ```javascript
 db.employees.find({})
@@ -146,6 +163,7 @@ db.employees.deleteOne({"emp_id":105})
 
 ---
 
+<h1 style='color:red;text-align:center;margin:15px'>🤖 Update Operations</h1>
 
 ### 21. Increase everyone's salary by ₹5,000.
 ```javascript
@@ -348,6 +366,7 @@ db.emp_address.updateMany(
 
 ---
 
+<h1 style='color:red;text-align:center;margin:15px'> ⛏️ Array Operations</h1>
 
 ### 41. Find employees having the skill "Python".
 ```javascript
@@ -503,6 +522,11 @@ db.employees.updateMany(
 )
 ```
 
+---
+
+<h1 style='color:red;text-align:center;margin:15px'>🪢 Embedded Documents Data</h1>
+
+
 ### 55. Find employees living in Hyderabad using an embedded address document.
 ```javascript
 db.emp_address.find({'address.city':'Hyderabad'})
@@ -602,7 +626,7 @@ db.emp_address.find(
 ```
 ---
 
-
+<h1 style='color:red;text-align:center;margin:15px'>🗝️ Query Operations</h1>
 
 ### 64. Find salaries greater than ₹50,000.
 ```javascript
@@ -724,4 +748,7 @@ db.employees.find(
 )
 ```
 
+---
+
+<h1 style='color:red;text-align:center;margin:15px'>🤝 Aggregation Functions</h1>
 
