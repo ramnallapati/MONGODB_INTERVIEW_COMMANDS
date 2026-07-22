@@ -336,3 +336,158 @@ db.emp_address.updateMany(
 ```
 
 ---
+
+
+### 41. Find employees having the skill "Python".
+```javascript
+db.employees.find(
+  {'skills':{$in:['Python']}}
+)
+```
+
+
+### 42. Find employees having both Python and MongoDB skills.
+```javascript
+db.employees.find(
+  {'skills':{$all:['Python','MongoDB']}}
+)
+```
+
+
+### 43. Find employees having at least three skills.
+```javascript
+db.employees.find({
+  $expr:{
+    $gte:[{$size:"$skills"},3]
+  }
+})
+```
+
+
+### 44. Find employees whose first skill is Python.
+```javascript
+db.employees.find({'skills.0':'Python'})
+```
+
+
+### 45. Remove duplicate skills.
+```javascript
+db.employees.updateMany(
+    {},
+    [
+        {
+            $set: {
+                skills: {
+                    $setUnion: ["$skills", []]
+                }
+            }
+        }
+    ]
+)
+```
+
+
+### 46. Add a new certification.
+```javascript
+db.employees.updateMany(
+  {},
+  {$addToSet:{
+    'certification':'AWS Developer'
+  }}
+)
+```
+
+### 47. Remove all certifications.
+```javascript
+db.employees.updateMany(
+  {},
+  {$unset:{'certification':''}}
+)
+```
+
+
+### 48. Find employees having TensorFlow or PyTorch.
+```javascript
+db.employees.find({
+    skills: {
+        $in: ["TensorFlow", "PyTorch"]
+    }
+})
+```
+
+
+### 49. Find employees without MongoDB skill.
+```javascript
+db.employees.find({'skills':{$nin:['MongoDB']}})
+```
+
+
+### 50. Find employees where any skill starts with "P".
+```javascript
+db.employees.find({'skills':{$regex:'^P'}})
+```
+
+
+### 51.Count employees with more than four skills.
+```javascript
+db.employees.countDocuments(
+  {$expr:
+  {
+    $gt:[{$size:'$skills'},4]
+  }}
+)
+```
+
+### 52. Find employees whose last skill is SQL.
+```javascript
+db.employees.find({
+  $expr:{
+    $eq:[
+      {$arrayElemAt:['$skills',-1]},
+      'SQL'
+    ]
+  }
+})
+```
+
+
+### 53.Push a project object into an array.
+```javascript
+db.employees.updateMany(
+  {},
+  {
+    $push:
+    {
+      projects:
+      {
+        $each:
+          [
+            {
+               project_id: 3,
+                project_name: "Banking Application",
+                technology: "Java",
+                duration: 10,
+            },
+            {
+              project_id:4,
+              project_name:'AI Chatbot',
+              technology:'TensorFlow',
+              duration:5,
+              status:'In Progress'
+            }
+          ]
+      }
+    }
+  }
+)
+```
+
+### 54. Remove a project object from an array.
+```javascript
+db.employees.updateMany(
+  {},
+  {
+    $unset:{'projects':''}
+  }
+)
+```
