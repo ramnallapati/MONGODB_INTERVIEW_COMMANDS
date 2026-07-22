@@ -1,0 +1,14 @@
+db.studios.insertMany([
+{
+studio_id:301,
+studio_name:"Warner Bros"
+},
+{
+studio_id:302,
+studio_name:"DC Studios"
+},
+{
+studio_id:303,
+studio_name:"20th Century Fox"
+}
+])

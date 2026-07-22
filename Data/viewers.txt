@@ -1,0 +1,17 @@
+db.viewers.insertMany([
+{
+viewer_id:501,
+viewer_name:"Rahul",
+city:"Hyderabad"
+},
+{
+viewer_id:502,
+viewer_name:"Priya",
+city:"Bangalore"
+},
+{
+viewer_id:503,
+viewer_name:"Anjali",
+city:"Chennai"
+}
+])

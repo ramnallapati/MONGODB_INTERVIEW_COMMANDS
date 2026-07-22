@@ -1,0 +1,32 @@
+db.actors.insertMany([
+{
+actor_id:401,
+actor_name:"Leonardo DiCaprio",
+movie_id:1
+},
+{
+actor_id:402,
+actor_name:"Matthew McConaughey",
+movie_id:2
+},
+{
+actor_id:403,
+actor_name:"Christian Bale",
+movie_id:3
+},
+{
+actor_id:404,
+actor_name:"Sam Worthington",
+movie_id:4
+},
+{
+actor_id:405,
+actor_name:"Kate Winslet",
+movie_id:5
+},
+{
+actor_id:406,
+actor_name:"Tom Hardy",
+movie_id:1
+}
+])

@@ -1,0 +1,12 @@
+db.directors.insertMany([
+{
+director_id:201,
+director_name:"Christopher Nolan",
+country:"UK"
+},
+{
+director_id:202,
+director_name:"James Cameron",
+country:"Canada"
+}
+])

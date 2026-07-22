@@ -1,0 +1,18 @@
+db.genres.insertMany([
+{
+genre_id:101,
+genre_name:"Science Fiction"
+},
+{
+genre_id:102,
+genre_name:"Action"
+},
+{
+genre_id:103,
+genre_name:"Fantasy"
+},
+{
+genre_id:104,
+genre_name:"Romance"
+}
+])
