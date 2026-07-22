@@ -1,6 +1,12 @@
 
-<div style="padding:5px;margin:10px;align-items:center">
-<img src='images/mongodb_image.png',width='500px',height='700px',alt='Mongodb Images'>
+<div style="display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;">
+    <img src="images/mongodb_image.png"
+         width="500"
+         height="700"
+         alt="MongoDB Image">
 </div>
 
 ### 1. Display all employees.
