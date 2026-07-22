@@ -491,3 +491,118 @@ db.employees.updateMany(
   }
 )
 ```
+
+### 55. Find employees living in Hyderabad using an embedded address document.
+```javascript
+db.emp_address.find({'address.city':'Hyderabad'})
+```
+
+### 56. Update the pincode inside the address.
+```javascript
+db.emp_address.updateMany(
+  {},
+  {
+    $set: {
+      "address.pincode": 523326
+    }
+  }
+)
+```
+
+### 57. Find employees whose state is Telangana.
+```javascript
+db.emp_address.find({'address.state':'Telangana'})
+```
+
+
+### 58. Add a country field inside address.
+```javascript
+db.emp_address.updateMany(
+  {},
+  {
+    $set:
+    {
+      'address.country':'India'
+    }
+  }
+)
+```
+
+
+### 59. Remove address.pincode.
+```javascript
+db.emp_address.updateMany(
+  {},
+  {
+    $unset:
+    {
+      'address.pincode':''
+    }
+  }
+)
+```
+
+
+### 60. Update employee's emergency contact.
+```javascript
+db.employees.updateMany(
+  {},
+  {
+    $set:
+    {
+      'emergency_contact':8309764967
+    }
+  }
+)
+```
+
+### 61. Find employees whose manager's name is Murali.
+```javascript
+db.employees.find(
+  {'manager_name':'Murali'}
+)
+```
+
+
+### 62. Update nested project status.
+```javascript
+db.emp_address.updateMany(
+  {},
+  {
+    $set:
+    {
+      'project_status':'Complete'
+    }
+  }
+)
+```
+
+
+
+### 63. Display only address.city.
+```javascript
+db.emp_address.find(
+  {},
+  {
+    _id:0,
+    'address.city':1
+  }
+)
+```
+---
+
+
+
+### 64. Find salaries greater than ₹50,000.
+```javascript
+db.employees.find({
+  salary:
+  {
+    $gt:50000
+  }
+})
+```
+
+
+
+
