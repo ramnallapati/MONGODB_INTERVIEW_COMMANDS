@@ -1,3 +1,8 @@
+
+<div style="padding:5px;margin:10px;align-items:center">
+<img src='images/mongodb_image.png',width='500px',height='700px',alt='Mongodb Images'>
+</div>
+
 ### 1. Display all employees.
 ```javascript
 db.employees.find({})
