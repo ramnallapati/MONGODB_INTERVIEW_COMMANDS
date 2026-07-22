@@ -752,3 +752,260 @@ db.employees.find(
 
 <h1 style='color:red;text-align:center;margin:15px'>🤝 Aggregation Functions</h1>
 
+### 74. Calculate the total salary paid by the company.
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $group:
+      {
+        _id:null,
+        total_employees_salary:{$sum:"$salary"}
+      }
+    }
+  ]
+)
+```
+
+
+### 75. Find the average salary.
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $group:{
+        _id:null,
+        employees_average_salary:{$avg:"$salary"}
+      }
+    }
+  ]
+)
+```
+
+### 76. Find the highest salary.
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $group:{
+        _id:null,
+        employees_highest_salary:{$max:"$salary"}
+      }
+    }
+  ]
+)
+```
+
+### 77. Find the lowest salary
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $group:{
+        _id:null,
+        employees_lowest_salary:{$min:"$salary"}
+      }
+    }
+  ]
+)
+```
+
+### 78. Find department-wise average salary.
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $group:
+      {
+        _id:"$department",
+        dept_avg_salary:{$avg:"$salary"}
+      }
+    }
+  ]
+)
+```
+
+### 79. Find department-wise employee count.
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $group:
+      {
+        _id:"$department",
+        dept_emp_count:{$sum:1}
+      }
+    }
+  ]
+)
+```
+
+
+### 80. Find city-wise employee count.
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $group:
+      {
+        _id:'$city',
+        city_emp_count:{$sum:1}
+      }
+    }
+  ]
+)
+```
+
+
+### 81. Find the top five highest-paid employees.
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $sort:{salary:-1}
+    },
+    {
+      $limit:3
+    },
+    {
+      $project:{_id:0,name:1,salary:1,city:1}
+    }
+  ]
+)
+```
+
+
+### 82. Find employees earning above the department average.
+```javascript
+db.employees.aggregate([
+  {
+    $setWindowFields: {
+      partitionBy: "$department",
+      output: {
+        departmentAverage: {
+          $avg: "$salary"
+        }
+      }
+    }
+  },
+  {
+    $match: {
+      $expr: {
+        $gt: ["$salary", "$departmentAverage"]
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      department: 1,
+      salary: 1,
+      departmentAverage: 1
+    }
+  }
+])
+```
+
+
+### 83. Group employees by designation.
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $group:
+      {
+        _id:"$designation"
+      }
+    }
+  ]
+)
+```
+
+### 84. Calculate total experience department-wise.
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $group:
+      {
+        _id:'$department',
+        department_total_experience:{$sum:"$experience"}
+      }
+    }
+  ]
+)
+```
+
+### 85. Find departments with more than five employees.
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $group:
+      {
+        _id:'$department',
+        emp_count:{'$sum':1}
+      }
+    },
+    {
+      $match:
+      {
+        emp_count:{$gt:5}
+      }
+    }
+  ]
+)
+```
+
+### 86. Sort departments by average salary.
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $group:
+      {
+        _id:'$department',
+        dept_avg_salary:{$avg:"$salary"}
+      }
+    },
+    {
+      $sort:{dept_avg_salary:1}
+    }
+  ]
+)
+```
+
+
+### 87. Find the second highest salary in a company
+```javascript
+db.employees.aggregate([
+  {
+    $sort: { salary: -1 }
+  },
+  {
+    $limit: 2
+  },
+  {
+    $skip: 1
+  }
+])
+```
+
+### 88. Display employee name and annual salary.
+```javascript
+db.employees.aggregate(
+  [
+    {
+      $project:{
+        _id:0,
+        name:1,
+        salary:1
+      }
+    }
+  ]
+)
+```
+
+---
+
