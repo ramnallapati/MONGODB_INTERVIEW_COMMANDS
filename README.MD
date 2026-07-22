@@ -625,10 +625,9 @@ db.employees.find(
     }
   }
 )
-
+```
 
 ### 67. Find salary not equal to ₹45,000.
-
 ```javascript
 db.employees.find(
   {
@@ -640,5 +639,78 @@ db.employees.find(
 )
 ```
 
+### 68. Find employees in Hyderabad, Chennai, or Bangalore.
+```javascript
+db.emp_address.find(
+  {
+    'address.city':
+    {
+      $in:['Hyderabad','Chennai','Bengaluru']
+    }
+  }
+)
+```
+
+
+### 69. Find employees not in Hyderabad.
+```javascript
+db.emp_address.find(
+  {
+    'address.city':
+    {
+      $ne:'Hyderabad'
+    }
+  }
+)
+```
+
+
+### 70. Find employees whose names start with "R".
+```javascript
+db.employees.find(
+  {
+    name:
+    {
+      $regex:"^R"
+    }
+  }
+)
+```
+
+```javascript
+db.employees.find({name:/^R/})
+```
+
+
+### 71. Find employees whose names end with "a".
+```javascript
+db.employees.find(
+  {
+    name:/a$/
+  }
+)
+```
+
+
+### 72. Find employees whose names contain "an".
+```javascript
+db.employees.find(
+  {
+    name:/an/
+  }
+)
+```
+
+
+### 73. Find employees older than 25 and working in IT.
+```javascript
+db.employees.find(
+  {
+    age:
+    {$lt:25},
+    department:'IT'
+  }
+)
+```
 
 
