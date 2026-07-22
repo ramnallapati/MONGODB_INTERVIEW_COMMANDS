@@ -604,5 +604,41 @@ db.employees.find({
 ```
 
 
+### 65. Find salaries less than ₹60,000.
+```javascript
+db.employees.find(
+  {
+    'salary':{$lt:60000}
+  }
+)
+```
+
+
+### 66. Find salaries between ₹40,000 and ₹70,000.
+```javascript
+db.employees.find(
+  {
+    salary:
+    {
+      $gt:40000,
+      $lt:70000
+    }
+  }
+)
+
+
+### 67. Find salary not equal to ₹45,000.
+
+```javascript
+db.employees.find(
+  {
+    salary:
+    {
+      $ne:45000
+    }
+  }
+)
+```
+
 
 
