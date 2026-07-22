@@ -1,0 +1,16 @@
+db.books.insertMany([
+{
+book_id:1,
+title:"MongoDB Basics",
+author:"John",
+price:550,
+stock:40
+},
+{
+book_id:2,
+title:"Python Master",
+author:"David",
+price:650,
+stock:22
+}
+])

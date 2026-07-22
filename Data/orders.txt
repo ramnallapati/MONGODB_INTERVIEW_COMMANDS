@@ -1,0 +1,23 @@
+db.orders.insertMany([
+{
+order_id:5001,
+customer_id:1,
+amount:2500,
+status:"Delivered",
+date:new Date("2024-01-15")
+},
+{
+order_id:5002,
+customer_id:2,
+amount:7000,
+status:"Pending",
+date:new Date("2024-02-01")
+},
+{
+order_id:5003,
+customer_id:3,
+amount:1500,
+status:"Cancelled",
+date:new Date("2024-02-11")
+}
+])

@@ -1,0 +1,23 @@
+db.projects.insertMany([
+{
+project_id:1001,
+project_name:"AI Chatbot",
+technology:"Python",
+budget:1500000,
+team_size:12
+},
+{
+project_id:1002,
+project_name:"E-Commerce",
+technology:"MERN",
+budget:2500000,
+team_size:18
+},
+{
+project_id:1003,
+project_name:"Hospital Management",
+technology:"Java",
+budget:900000,
+team_size:8
+}
+])
