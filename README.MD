@@ -1009,3 +1009,278 @@ db.employees.aggregate(
 
 ---
 
+
+<h1 style='color:red;text-align:center;margin:15px'>🤞 Mongodb Lookup</h1>
+
+### 89. Display customer name along with order details.
+```javascript
+db.customers.aggregate(
+  [
+    {
+      $lookup:
+      {
+        from:"orders",
+        localField:"customer_id",
+        foreignField:'customer_id',
+        as:'customer_orders'
+      }
+    },
+    {
+      $project:{_id:0,name:1,customer_orders:1}
+    }
+  ]
+)
+```
+
+### 90. Display movie title along with genre details.
+```javascript
+db.movies.aggregate(
+  [
+    {
+      $lookup:
+      {
+        from:'genres',
+        localField:'genre_id',
+        foreignField:'genre_id',
+        as:"movie_genre"
+      }
+    },
+    {
+      $project:{_id:0,title:1,movie_genre:1}
+    }
+  ]
+)
+```
+
+
+### 91. Display movie title along with director details.
+```javascript
+db.movies.aggregate(
+  [
+    {
+      $lookup:
+      {
+        from:"directors",
+        localField:"director_id",
+        foreignField:"director_id",
+        as:"director_info"
+      }
+    },
+    {
+      $unwind:"$director_info"
+    },
+    {
+      $project:
+      {
+        _id:0,
+        title:1,
+        director:'$director_info.director_name',
+        country:'$director_info.country'
+      }
+    }
+  ]
+)
+```
+
+### 92. Display all actors for every movie.
+```javascript
+db.movies.aggregate(
+  [
+    {
+      $lookup:
+      {
+        from:"actors",
+        localField:'movie_id',
+        foreignField:'movie_id',
+        as:'actors'
+      }
+    },
+    {
+      $project:
+      {
+        _id:0,
+        title:1,
+        actor_names:'$actors.actor_name'
+      }
+    }
+  ]
+)
+```
+
+### 93. Find movies that don't have any actors.
+```javascript
+db.movies.aggregate([
+  {
+    $lookup: {
+      from: "actors",
+      localField: "movie_id",
+      foreignField: "movie_id",
+      as: "actors"
+    }
+  },
+  {
+    $match: {
+      $expr: {
+        $eq: [
+          { $size: "$actors" },
+          0
+        ]
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      title: 1
+    }
+  }
+])
+```
+
+
+### 94. Display viewers along with the movies they booked.
+```javascript
+db.movies.aggregate(
+  [
+    {
+      $lookup:
+      {
+        from:'bookings',
+        localField:'movie_id',
+        foreignField:"movie_id",
+        as:'movie_bookings'
+      }
+    },
+    {
+      $unwind:'$movie_bookings'
+    },
+    {
+      $lookup:
+      {
+        from:"viewers",
+        localField:'movie_bookings.viewer_id',
+        foreignField:'viewer_id',
+        as:'movie_viewers'
+      }
+    },
+    {
+      $unwind:'$movie_viewers'
+    },
+    {
+      $project:
+      {
+        _id:0,
+        title:1,
+        viewer_name:'$movie_viewers.viewer_name',
+        tickets:'$movie_bookings.tickets'
+      }
+    }
+  ]
+)
+```
+
+
+### 95. Find the number of actors in each movie
+```javascript
+db.movies.aggregate(
+  [
+    {
+      $lookup:
+      {
+        from:'actors',
+        localField:'movie_id',
+        foreignField:'movie_id',
+        as:'actors'
+      }
+    },
+    {
+      $project:
+      {
+        _id:0,
+        title:1,
+        actor_names:'$actors.actor_name',
+        totalActors:{$size:'$actors.actor_name'}
+      }
+    }
+  ]
+)
+```
+
+
+### 96. Display complete movie information.
+```javascript
+db.movies.aggregate(
+  [
+    {
+      $lookup:
+      {
+        from:'genres',
+        localField:'genre_id',
+        foreignField:'genre_id',
+        as:'movie_genres'
+      }
+    },
+    {
+      $lookup:
+      {
+        from:'actors',
+        localField:'movie_id',
+        foreignField:'movie_id',
+        as:'movie_actors'
+      } 
+    },
+    {
+      $lookup:
+      {
+        from:'directors',
+        localField:'director_id',
+        foreignField:'director_id',
+        as:'movie_directors'
+      }
+    },
+    {
+      $lookup:
+      {
+        from:'studios',
+        localField:'studio_id',
+        foreignField:'studio_id',
+        as:'movie_studios'
+      }
+    },
+    {
+      $lookup:
+      {
+        from:'bookings',
+        localField:'movie_id',
+        foreignField:'movie_id',
+        as:'movie_bookings'
+      }
+    },
+    {
+      $lookup:
+      {
+        from:'viewers',
+        localField:'movie_bookings.viewer_id',
+        foreignField:'viewer_id',
+        as:'movie_viewers'
+      }
+    },
+    {
+      $project:
+      {
+        _id:0,
+        title:1,
+        release_year:1,
+        genre:'$movie_genres.genre_name',
+        actors:'$movie_actors.actor_name',
+        director_name:'$movie_directors.director_name',
+        country:'$movie_directors.country',
+        studio_name:'$movie_studios.studio_name',
+        no_tickets:'$move_bookings.tickets',
+        viewer_names : '$movie_viewers.viewer_name',
+        viewer_city:'$movie_viewers.city'
+      }
+    }
+  ]
+)
+```
