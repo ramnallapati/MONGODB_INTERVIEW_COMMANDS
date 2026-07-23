@@ -90,7 +90,7 @@ db.employees.find().sort({'salary':1})
 
 ### 10. Sort employees by age in descending order.
 ```javascript
-db.employees.find().sort({'salary':-1})
+db.employees.find().sort({'age':-1})
 ```
 
 ---
